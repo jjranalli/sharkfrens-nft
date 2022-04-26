@@ -22,12 +22,8 @@ contract SharkFrensTest is ERC721, SlicerPurchasable, Ownable {
     // Total number of tokens to be minted in drop 1
     /// @dev drop[1] has 4 NFTs in test
     uint8 private constant DROP1_UNITS = 4;
-    // Metadata URI for artwork #1
-    string private constant ART1_URI = "1";
-    // Metadata URI for artwork #2
-    string private constant ART2_URI = "2";
-    // Metadata URI for artwork #3
-    string private constant ART3_URI = "3";
+    // Mapping from artwork Ids to tokenURIs
+    mapping(uint256 => string) _tokenURIs;
     // Mapping from product Ids to Drop
     mapping(uint256 => Drop) _drops;
 
@@ -116,18 +112,18 @@ contract SharkFrensTest is ERC721, SlicerPurchasable, Ownable {
     /**
      * @notice Returns URI of tokenId
      */
-    function tokenURI(uint256 tokenId) public pure override returns (string memory) {
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
         // If in drop[2]
         if (tokenId > DROP1_UNITS) {
-            return ART3_URI;
+            return _tokenURIs[3];
         }
         // If in drop[1] and tokenId is even
         else if (tokenId % 2 == 0) {
-            return ART2_URI;
+            return _tokenURIs[2];
         }
         // If in drop[1] and tokenId is odd
         else {
-            return ART1_URI;
+            return _tokenURIs[1];
         }
     }
 
@@ -147,5 +143,14 @@ contract SharkFrensTest is ERC721, SlicerPurchasable, Ownable {
      */
     function _setMerkleRoot(uint256 productId, bytes32 merkleRoot) external onlyOwner {
         _drops[productId].merkleRoot = merkleRoot;
+    }
+
+    /**
+     * Sets tokenURI for artworkId
+     *
+     * @dev Only accessible to contract owner
+     */
+    function _setTokenURI(uint256 artworkId, string memory tokenURI_) external onlyOwner {
+        _tokenURIs[artworkId] = tokenURI_;
     }
 }
