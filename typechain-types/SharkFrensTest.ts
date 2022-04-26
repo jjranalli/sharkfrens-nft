@@ -18,8 +18,8 @@ import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
-export interface SharkFrensInterface extends utils.Interface {
-  contractName: "SharkFrens";
+export interface SharkFrensTestInterface extends utils.Interface {
+  contractName: "SharkFrensTest";
   functions: {
     "_setMerkleRoot(uint256,bytes32)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
@@ -219,13 +219,13 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface SharkFrens extends BaseContract {
-  contractName: "SharkFrens";
+export interface SharkFrensTest extends BaseContract {
+  contractName: "SharkFrensTest";
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: SharkFrensInterface;
+  interface: SharkFrensTestInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,

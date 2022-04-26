@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./extensions/Purchasable/SlicerPurchasable.sol";
+import "../extensions/Purchasable/SlicerPurchasable.sol";
 import "@rari-capital/solmate/src/tokens/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
-import "./structs/Drop.sol";
+import "../structs/Drop.sol";
 
-contract SharkFrens is ERC721, SlicerPurchasable, Ownable {
+/// @dev SharkFrens implementation, with DROP1_UNITS = 4 for testing purposes
+
+contract SharkFrensTest is ERC721, SlicerPurchasable, Ownable {
     /// ============ Errors ============
 
     // Thrown when an invalid query is made
@@ -18,14 +20,14 @@ contract SharkFrens is ERC721, SlicerPurchasable, Ownable {
     /// ============ Storage ============
 
     // Total number of tokens to be minted in drop 1
-    /// @dev drop[1] has 62 NFTs per each artwork
-    uint8 private constant DROP1_UNITS = 124;
+    /// @dev drop[1] has 4 NFTs in test
+    uint8 private constant DROP1_UNITS = 4;
     // Metadata URI for artwork #1
-    string private constant ART1_URI = "";
+    string private constant ART1_URI = "1";
     // Metadata URI for artwork #2
-    string private constant ART2_URI = "";
+    string private constant ART2_URI = "2";
     // Metadata URI for artwork #3
-    string private constant ART3_URI = "";
+    string private constant ART3_URI = "3";
     // Mapping from product Ids to Drop
     mapping(uint256 => Drop) _drops;
 

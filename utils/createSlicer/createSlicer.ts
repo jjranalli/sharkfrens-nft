@@ -1,6 +1,6 @@
 import { ethers } from "hardhat"
 import { a0, a1, sliceCore } from "../../test/setup"
-import { getEventArgsByIndex } from "../../utils"
+import { getEventArgsByIndex } from ".."
 import { Slicer } from "../../typechain-types/Slicer"
 
 export const createSlicer = async (

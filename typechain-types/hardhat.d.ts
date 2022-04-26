@@ -173,6 +173,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IErc20Permit__factory>;
     getContractFactory(
+      name: "ERC721",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721__factory>;
+    getContractFactory(
+      name: "ERC721TokenReceiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721TokenReceiver__factory>;
+    getContractFactory(
       name: "IUniswapV3Factory",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IUniswapV3Factory__factory>;
@@ -221,9 +229,13 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ISlicerPurchasablePayable__factory>;
     getContractFactory(
-      name: "Sharkfrens",
+      name: "SharkFrens",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Sharkfrens__factory>;
+    ): Promise<Contracts.SharkFrens__factory>;
+    getContractFactory(
+      name: "SharkFrensTest",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SharkFrensTest__factory>;
     getContractFactory(
       name: "JuiceboxProject",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -694,6 +706,16 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IErc20Permit>;
     getContractAt(
+      name: "ERC721",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721>;
+    getContractAt(
+      name: "ERC721TokenReceiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721TokenReceiver>;
+    getContractAt(
       name: "IUniswapV3Factory",
       address: string,
       signer?: ethers.Signer
@@ -754,10 +776,15 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.ISlicerPurchasablePayable>;
     getContractAt(
-      name: "Sharkfrens",
+      name: "SharkFrens",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.Sharkfrens>;
+    ): Promise<Contracts.SharkFrens>;
+    getContractAt(
+      name: "SharkFrensTest",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SharkFrensTest>;
     getContractAt(
       name: "JuiceboxProject",
       address: string,

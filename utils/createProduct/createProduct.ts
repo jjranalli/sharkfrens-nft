@@ -1,7 +1,7 @@
 import { BigNumber } from "ethers"
 import { ethers } from "hardhat"
 import { Slicer } from "../../typechain-types/Slicer"
-import { getEventArgsByIndex } from "../../utils"
+import { getEventArgsByIndex } from ".."
 const { getContractAt } = ethers
 import { BigNumberish } from "ethers"
 import { productsModule } from "../../test/setup"

@@ -8,8 +8,10 @@ const slicerId = 1 // The ID of the slicer that will be able to interact with th
 async function main() {
   console.log("deploying")
 
-  const CONTRACT = await ethers.getContractFactory("Sharkfrens")
+  const CONTRACT = await ethers.getContractFactory("SharkFrens")
   const contract = await CONTRACT.deploy(
+    "Shark Frens",
+    "FRENS",
     addresses[env]["ProductsModule"],
     slicerId
   )
