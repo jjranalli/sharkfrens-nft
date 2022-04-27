@@ -54,6 +54,9 @@ describe("{Sharkfrens}", () => {
 
     await sharkfrens._setMerkleRoot(1, merkleRoot)
     await sharkfrens._setMerkleRoot(2, merkleRoot)
+    await sharkfrens._setTokenURI(1, "1")
+    await sharkfrens._setTokenURI(2, "2")
+    await sharkfrens._setTokenURI(3, "3")
 
     await createProduct(slicerId, slicerAddr, 1, 62, [], true, false, [], {
       externalAddress: sharkfrens.address,
@@ -266,6 +269,12 @@ describe("{Sharkfrens}", () => {
     })
   })
 
+  describe("setTokenURI", () => {
+    it("Owner can set tokenURI for artworks", async () => {
+      await expect(sharkfrens._setTokenURI(4, "4")).to.not.be.reverted
+    })
+  })
+
   describe("Reverts", () => {
     it("onProductPurchase - Not in allowlist", async () => {
       const proofA4 = merkleTree.getHexProof(keccak256(a4))
@@ -308,9 +317,10 @@ describe("{Sharkfrens}", () => {
     })
   })
 
-  it("Only contract owner can set Merkle root for new allowlists", async () => {
+  it("Only contract owner can set Merkle root or tokenURIs", async () => {
     const bytes32String = ethers.utils.formatBytes32String("asd")
     await expect(sharkfrens.connect(addr1)._setMerkleRoot(5, bytes32String)).to
       .be.reverted
+    await expect(sharkfrens.connect(addr1)._setTokenURI(5, "5")).to.be.reverted
   })
 })

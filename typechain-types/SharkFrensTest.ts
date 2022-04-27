@@ -22,6 +22,7 @@ export interface SharkFrensTestInterface extends utils.Interface {
   contractName: "SharkFrensTest";
   functions: {
     "_setMerkleRoot(uint256,bytes32)": FunctionFragment;
+    "_setTokenURI(uint256,string)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
@@ -45,6 +46,10 @@ export interface SharkFrensTestInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "_setMerkleRoot",
     values: [BigNumberish, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_setTokenURI",
+    values: [BigNumberish, string]
   ): string;
   encodeFunctionData(
     functionFragment: "approve",
@@ -123,6 +128,10 @@ export interface SharkFrensTestInterface extends utils.Interface {
 
   decodeFunctionResult(
     functionFragment: "_setMerkleRoot",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_setTokenURI",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
@@ -253,6 +262,12 @@ export interface SharkFrensTest extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    _setTokenURI(
+      artworkId: BigNumberish,
+      tokenURI_: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     approve(
       spender: string,
       id: BigNumberish,
@@ -356,6 +371,12 @@ export interface SharkFrensTest extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  _setTokenURI(
+    artworkId: BigNumberish,
+    tokenURI_: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   approve(
     spender: string,
     id: BigNumberish,
@@ -450,6 +471,12 @@ export interface SharkFrensTest extends BaseContract {
     _setMerkleRoot(
       productId: BigNumberish,
       merkleRoot: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    _setTokenURI(
+      artworkId: BigNumberish,
+      tokenURI_: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -593,6 +620,12 @@ export interface SharkFrensTest extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    _setTokenURI(
+      artworkId: BigNumberish,
+      tokenURI_: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     approve(
       spender: string,
       id: BigNumberish,
@@ -694,6 +727,12 @@ export interface SharkFrensTest extends BaseContract {
     _setMerkleRoot(
       productId: BigNumberish,
       merkleRoot: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    _setTokenURI(
+      artworkId: BigNumberish,
+      tokenURI_: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
