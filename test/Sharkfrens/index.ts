@@ -165,7 +165,7 @@ describe("{Sharkfrens}", () => {
 
       expect(finalBalance.sub(initBalance)).to.be.equal(2)
       expect(await sharkfrens.ownerOf(1)).to.be.equal(a1)
-      expect(await sharkfrens.ownerOf(2)).to.be.equal(a1)
+      expect(await sharkfrens.ownerOf(3)).to.be.equal(a1)
       expect(await sharkfrens.totalSupply()).to.be.equal(2)
     })
 
@@ -217,7 +217,7 @@ describe("{Sharkfrens}", () => {
       const finalBalance = await sharkfrens.balanceOf(a2)
 
       expect(finalBalance.sub(initBalance)).to.be.equal(2)
-      expect(await sharkfrens.ownerOf(3)).to.be.equal(a2)
+      expect(await sharkfrens.ownerOf(2)).to.be.equal(a2)
       expect(await sharkfrens.ownerOf(4)).to.be.equal(a2)
     })
 
@@ -256,7 +256,7 @@ describe("{Sharkfrens}", () => {
   describe("tokenURI", () => {
     it("Returns correct tempURI based on tokenId", async () => {
       expect(await sharkfrens.tokenURI(1)).to.be.equal("1")
-      expect(await sharkfrens.tokenURI(2)).to.be.equal("2")
+      expect(await sharkfrens.tokenURI(3)).to.be.equal("2")
       expect(await sharkfrens.tokenURI(5)).to.be.equal("3")
     })
   })

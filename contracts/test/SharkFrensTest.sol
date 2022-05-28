@@ -21,7 +21,7 @@ contract SharkFrensTest is ERC721, SlicerPurchasable, Ownable {
 
     // Total number of tokens to be minted in drop 1
     /// @dev drop[1] has 4 NFTs in test
-    uint8 private constant DROP1_UNITS = 4;
+    uint8 private constant DROP1_UNITS = 2;
     // Mapping from artwork Ids to tokenURIs
     mapping(uint256 => string) _tokenURIs;
     // Mapping from product Ids to Drop
@@ -35,7 +35,7 @@ contract SharkFrensTest is ERC721, SlicerPurchasable, Ownable {
         address productsModuleAddress_,
         uint256 slicerId_
     ) ERC721(name_, symbol_) SlicerPurchasable(productsModuleAddress_, slicerId_) {
-        _drops[2].tokenId = DROP1_UNITS;
+        _drops[2].tokenId = DROP1_UNITS * 2;
     }
 
     /// ============ Functions ============
@@ -95,15 +95,15 @@ contract SharkFrensTest is ERC721, SlicerPurchasable, Ownable {
             if (productId == 1) {
                 // Add reference for current tokenId of drop[1] + 1
                 uint256 tokenId = _drops[1].tokenId + 1;
-                // Mint two tokens with consequential ID
+                // Mint two tokens with ID [X] and [X + DROP1_UNITS]
                 _safeMint(account, tokenId);
-                _safeMint(account, tokenId + 1);
-                // Update tokenId of drop[1] + 2
-                _drops[1].tokenId += 2;
+                _safeMint(account, tokenId + DROP1_UNITS);
+                // Update tokenId of drop[1]
+                _drops[1].tokenId++;
             } else if (productId == 2) {
                 // Mint one token with current tokenId of drop[2]
                 _safeMint(account, _drops[2].tokenId + 1);
-                // Update tokenId of drop[1] + 1
+                // Update tokenId of drop[2]
                 _drops[2].tokenId++;
             }
         }
@@ -114,14 +114,14 @@ contract SharkFrensTest is ERC721, SlicerPurchasable, Ownable {
      */
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         // If in drop[2]
-        if (tokenId > DROP1_UNITS) {
+        if (tokenId > DROP1_UNITS * 2) {
             return _tokenURIs[3];
         }
-        // If in drop[1] and tokenId is even
-        else if (tokenId % 2 == 0) {
+        // If in drop[1] and tokenId is in the second half
+        else if (tokenId > DROP1_UNITS) {
             return _tokenURIs[2];
         }
-        // If in drop[1] and tokenId is odd
+        // If in drop[1] and tokenId is in the first half
         else {
             return _tokenURIs[1];
         }
@@ -133,7 +133,7 @@ contract SharkFrensTest is ERC721, SlicerPurchasable, Ownable {
      * Calculated from current tokenIds of drop[1] and drop[2]
      */
     function totalSupply() external view returns (uint256) {
-        return _drops[1].tokenId + _drops[2].tokenId - DROP1_UNITS;
+        return (_drops[1].tokenId * 2) + _drops[2].tokenId - (DROP1_UNITS * 2);
     }
 
     /**
